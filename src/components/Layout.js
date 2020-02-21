@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles(() => ({
   container: {
     marginTop: '100px',
+    marginBottom: '50px',
   },
   paper: {
     padding: '20px',
@@ -25,11 +26,11 @@ export default function Layout({ form, table }) {
   return (
     <Container>
       <Grid className={classes.container} container spacing={1}>
-        <Grid item md={4}>
+        <Grid item xs={12} md={4}>
           <Paper className={classes.paper}>{form}</Paper>
         </Grid>
-        <Grid className={classes.gridItem} item md={8}>
-          <Paper className={classes.paper}>{table}</Paper>
+        <Grid className={classes.gridItem} item xs={12} md={8}>
+          <Paper>{table}</Paper>
         </Grid>
       </Grid>
     </Container>
