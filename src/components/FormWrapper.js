@@ -1,0 +1,37 @@
+import React from 'react';
+import { Formik, Form } from 'formik';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    '& > div': {
+      marginBottom: '20px !important',
+    },
+  },
+}));
+
+export default function FormWrapper({
+  handleSubmit,
+  validationSchema,
+  children,
+  ...props
+}) {
+  const classes = useStyles();
+  return (
+    <Formik
+      onSubmit={handleSubmit}
+      validationSchema={validationSchema}
+      {...props}
+    >
+      {props => {
+        return (
+          <Form className={classes.form} onSubmit={props.handleSubmit}>
+            {children}
+          </Form>
+        );
+      }}
+    </Formik>
+  );
+}
