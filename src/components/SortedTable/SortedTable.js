@@ -5,6 +5,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import EnhancedTableHead from './TableHead';
+import { stableSort, getComparator } from '../../utils/stableSort';
 
 export default function SortedTable({ cells, data }) {
   const [order, setOrder] = React.useState('asc');
@@ -20,8 +21,8 @@ export default function SortedTable({ cells, data }) {
   );
 
   return (
-    <TableContainer>
-      <Table>
+    <TableContainer style={{ height: '100%' }}>
+      <Table stickyHeader>
         <EnhancedTableHead
           cells={cells}
           onRequestSort={onRequestSort}
@@ -29,7 +30,7 @@ export default function SortedTable({ cells, data }) {
           order={order}
         />
         <TableBody>
-          {data.map((row, idx) => (
+          {stableSort(data, getComparator(order, orderBy)).map((row, idx) => (
             <TableRow>
               {cells.map(key => (
                 <TableCell>{row[key]}</TableCell>
