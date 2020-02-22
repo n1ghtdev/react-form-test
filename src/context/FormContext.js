@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const FormContext = React.createContext();
 
@@ -7,7 +8,6 @@ export function FormProvider({ children }) {
 
   React.useEffect(() => {
     const cache = localStorage.getItem('form-data');
-    console.log(cache);
 
     if (cache) {
       setData(JSON.parse(cache));
@@ -20,7 +20,7 @@ export function FormProvider({ children }) {
         localStorage.setItem('form-data', JSON.stringify(data));
       }
     } catch (error) {
-      throw new Error(error.message);
+      console.error(error.message);
     }
   }, [data]);
 
@@ -36,3 +36,7 @@ export function FormProvider({ children }) {
 }
 
 export const useFormContext = () => React.useContext(FormContext);
+
+FormProvider.propTypes = {
+  children: PropTypes.node,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Formik, Form } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -35,3 +36,9 @@ export default function FormWrapper({
     </Formik>
   );
 }
+
+FormWrapper.propTypes = {
+  handleSubmit: PropTypes.func,
+  validationSchema: PropTypes.object,
+  children: PropTypes.node,
+};

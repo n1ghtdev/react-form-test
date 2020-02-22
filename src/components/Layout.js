@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -42,3 +43,8 @@ export default function Layout({ form, table }) {
     </Container>
   );
 }
+
+Layout.propTypes = {
+  form: PropTypes.node,
+  table: PropTypes.node,
+};

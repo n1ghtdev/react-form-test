@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useField } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -23,3 +24,7 @@ export default function Select({ options, ...props }) {
     </TextField>
   );
 }
+
+Select.propTypes = {
+  options: PropTypes.array,
+};

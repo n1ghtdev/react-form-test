@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -31,9 +32,10 @@ export default function SortedTable({ cells, data }) {
         />
         <TableBody>
           {stableSort(data, getComparator(order, orderBy)).map((row, idx) => (
-            <TableRow>
+            // don't use index for keys especially with sorting
+            <TableRow key={idx}>
               {cells.map(key => (
-                <TableCell>{row[key]}</TableCell>
+                <TableCell key={row[key]}>{row[key]}</TableCell>
               ))}
             </TableRow>
           ))}
@@ -42,3 +44,8 @@ export default function SortedTable({ cells, data }) {
     </TableContainer>
   );
 }
+
+SortedTable.propTypes = {
+  cells: PropTypes.arrayOf(PropTypes.string),
+  data: PropTypes.array,
+};

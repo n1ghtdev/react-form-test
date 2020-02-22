@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -35,3 +36,10 @@ export default function EnhancedTableHead({
     </TableHead>
   );
 }
+
+TableHead.propTypes = {
+  cells: PropTypes.arrayOf(PropTypes.string),
+  orderBy: PropTypes.string,
+  order: PropTypes.string,
+  onRequestSort: PropTypes.func,
+};
