@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import FormWrapper from '../components/FormWrapper';
 import Input from '../components/inputs/Input';
 import Select from '../components/inputs/Select';
-import { useFormContext } from '../FormContext';
+import { useFormContext } from '../context/FormContext';
 import { userValidationSchema } from '../utils/userValidationSchema';
 
 const initialValues = {
