@@ -17,9 +17,7 @@ export function FormProvider({ children }) {
 
   React.useEffect(() => {
     try {
-      if (data.length > 0) {
-        localStorage.setItem('form-data', JSON.stringify(data));
-      }
+      localStorage.setItem('form-data', JSON.stringify(data));
     } catch (error) {
       console.error(error.message);
     }

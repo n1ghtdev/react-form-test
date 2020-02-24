@@ -30,7 +30,7 @@ export default function FormWrapper({
     >
       {props => {
         return (
-          <Form className={classes.form} onSubmit={() => props.handleSubmit()}>
+          <Form className={classes.form} onSubmit={e => props.handleSubmit(e)}>
             {children}
           </Form>
         );
