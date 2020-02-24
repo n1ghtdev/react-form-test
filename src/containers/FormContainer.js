@@ -25,6 +25,7 @@ export default function FormContainer() {
 
   function handleSubmit(values, action) {
     addPerson(values);
+    action.resetForm();
   }
 
   return (

@@ -32,6 +32,7 @@ export default function EnhancedTableHead({
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell padding="checkbox"></TableCell>
       </TableRow>
     </TableHead>
   );

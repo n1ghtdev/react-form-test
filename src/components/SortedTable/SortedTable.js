@@ -7,8 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import EnhancedTableHead from './TableHead';
 import { stableSort, getComparator } from '../../utils/stableSort';
+import ButtonDelete from './ButtonDelete';
 
-export default function SortedTable({ cells, data }) {
+export default function SortedTable({ cells, data, onDelete }) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState(cells[0]);
 
@@ -32,11 +33,13 @@ export default function SortedTable({ cells, data }) {
         />
         <TableBody>
           {stableSort(data, getComparator(order, orderBy)).map((row, idx) => (
-            // don't use index for keys especially with sorting
-            <TableRow key={idx}>
+            <TableRow key={row.id}>
               {cells.map(key => (
                 <TableCell key={row[key]}>{row[key]}</TableCell>
               ))}
+              <TableCell padding="checkbox">
+                <ButtonDelete onClick={() => onDelete(row.id)} />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -48,4 +51,5 @@ export default function SortedTable({ cells, data }) {
 SortedTable.propTypes = {
   cells: PropTypes.arrayOf(PropTypes.string),
   data: PropTypes.array,
+  onDelete: PropTypes.func,
 };

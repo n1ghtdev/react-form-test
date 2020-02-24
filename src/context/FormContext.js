@@ -1,6 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+function generateID() {
+  return (
+    '_' +
+    Math.random()
+      .toString(36)
+      .substr(2, 9)
+  );
+}
+
 export const FormContext = React.createContext();
 
 export function FormProvider({ children }) {
@@ -16,7 +25,7 @@ export function FormProvider({ children }) {
 
   React.useEffect(() => {
     try {
-      if (data) {
+      if (data.length > 0) {
         localStorage.setItem('form-data', JSON.stringify(data));
       }
     } catch (error) {
@@ -25,11 +34,16 @@ export function FormProvider({ children }) {
   }, [data]);
 
   function addPerson(person) {
-    setData(prev => [...prev, person]);
+    setData(prev => [...prev, { ...person, id: generateID() }]);
+  }
+
+  function deletePerson(id) {
+    const filteredData = data.filter(el => el.id !== id);
+    setData(filteredData);
   }
 
   return (
-    <FormContext.Provider value={{ formData: data, addPerson }}>
+    <FormContext.Provider value={{ formData: data, addPerson, deletePerson }}>
       {children}
     </FormContext.Provider>
   );
