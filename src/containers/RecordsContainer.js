@@ -5,11 +5,15 @@ import { getUniqueKeys } from '../utils/getUniqueKeys';
 import EmptyTable from '../components/EmptyTable';
 
 export default function RecordsContainer() {
-  const { formData } = useFormContext();
+  const { formData, deletePerson } = useFormContext();
   const isEmpty = formData && formData.length === 0;
 
   return !isEmpty ? (
-    <SortedTable cells={getUniqueKeys(formData)} data={formData} />
+    <SortedTable
+      cells={getUniqueKeys(formData, ['id'])}
+      data={formData}
+      onDelete={id => deletePerson(id)}
+    />
   ) : (
     <EmptyTable />
   );

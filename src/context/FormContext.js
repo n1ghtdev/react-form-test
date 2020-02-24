@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getRandomID } from '../utils/getRandomID';
 
 export const FormContext = React.createContext();
 
@@ -16,7 +17,7 @@ export function FormProvider({ children }) {
 
   React.useEffect(() => {
     try {
-      if (data) {
+      if (data.length > 0) {
         localStorage.setItem('form-data', JSON.stringify(data));
       }
     } catch (error) {
@@ -25,11 +26,16 @@ export function FormProvider({ children }) {
   }, [data]);
 
   function addPerson(person) {
-    setData(prev => [...prev, person]);
+    setData(prev => [...prev, { ...person, id: getRandomID() }]);
+  }
+
+  function deletePerson(id) {
+    const filteredData = data.filter(el => el.id !== id);
+    setData(filteredData);
   }
 
   return (
-    <FormContext.Provider value={{ formData: data, addPerson }}>
+    <FormContext.Provider value={{ formData: data, addPerson, deletePerson }}>
       {children}
     </FormContext.Provider>
   );

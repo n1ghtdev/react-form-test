@@ -17,6 +17,7 @@ export default function FormWrapper({
   handleSubmit,
   validationSchema,
   children,
+  initialValues,
   ...props
 }) {
   const classes = useStyles();
@@ -24,11 +25,12 @@ export default function FormWrapper({
     <Formik
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
+      initialValues={initialValues}
       {...props}
     >
       {props => {
         return (
-          <Form className={classes.form} onSubmit={props.handleSubmit}>
+          <Form className={classes.form} onSubmit={() => props.handleSubmit()}>
             {children}
           </Form>
         );
@@ -41,4 +43,5 @@ FormWrapper.propTypes = {
   handleSubmit: PropTypes.func,
   validationSchema: PropTypes.object,
   children: PropTypes.node,
+  initialValues: PropTypes.object,
 };
