@@ -1,14 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-function generateID() {
-  return (
-    '_' +
-    Math.random()
-      .toString(36)
-      .substr(2, 9)
-  );
-}
+import { getRandomID } from '../utils/getRandomID';
 
 export const FormContext = React.createContext();
 
@@ -34,7 +26,7 @@ export function FormProvider({ children }) {
   }, [data]);
 
   function addPerson(person) {
-    setData(prev => [...prev, { ...person, id: generateID() }]);
+    setData(prev => [...prev, { ...person, id: getRandomID() }]);
   }
 
   function deletePerson(id) {
